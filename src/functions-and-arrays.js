@@ -251,29 +251,30 @@ const matrix = [
 ];
 
 function greatestProduct(anyMatrix) {
-  let productMax = 0;
-  for (let i = 0; i < matrix.length; i++) {
-     for (let j = 0; j < matrix[0].length - 3; j++) {
-        let productRow = matrix[j] * matrix[j+1] * matrix[j+2] * matrix[j+3];
+  
+  let max=0,result;
+    
+    for (let i = 0; i < anyMatrix.length; i++) {
+  
+      for (let j = 0; j < anyMatrix[i].length; j++) {
+        //check horizontal:
+        if((j-3)>0){
+        result = anyMatrix[i][j] * anyMatrix[i][j-1] * anyMatrix[i][j-2] * anyMatrix[i][j-3];
         
-        if (productRow > productMax) {
-        productMax = productRow;
+        if (max < result) {
+        max = result;
         }
       }
-    }
-  
-    for (let i = 0; i < matrix[0].length; i++) {
-  
-      for (let j = 0; j < matrix.length - 3; j++) {
-        let productColumn = matrix[j][i] * matrix[j+1][i] * matrix[j+2][i] * matrix[j+3][i];
+      //check vertical:
+      if((i-3)>0){
+        result = anyMatrix[i][j] * anyMatrix[i-1][j] * anyMatrix[i-2][j] * anyMatrix[i-3][j];
         
-        if (productColumn > productMax) {
-        productMax = productColumn;
+        if (max < result) {
+        max = result;
         }
-      }
-    }
-     return productMax
-  }
+    }}
+     return max;
+  }}
 greatestProduct(matrix);
 
 
